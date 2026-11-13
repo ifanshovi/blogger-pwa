@@ -9,12 +9,7 @@ export interface GetManifestOptions {
 }
 
 export function getManifest(
-  {
-    manifest: { screenshots, shortcuts, ...manifest } = {},
-    base,
-    iconsBase = '.',
-    screenshotsBase = '.',
-  }: GetManifestOptions = { manifest: {} },
+  { manifest: { screenshots, shortcuts, ...manifest } = {}, base, iconsBase = '.', screenshotsBase = '.' }: GetManifestOptions = { manifest: {} },
 ): Manifest {
   return {
     ...manifest,
