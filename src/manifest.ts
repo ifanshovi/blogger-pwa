@@ -19,12 +19,7 @@ export function getManifest(
           scope: manifest.scope ? new URL(manifest.scope, base).toString() : base,
         }
       : undefined),
-    icons: [
-      {
-        src: path.posix.join(iconsBase, 'favicon.ico'),
-        sizes: '64x64',
-        type: 'image/x-icon',
-      },
+    icons: [      
       {
         src: path.posix.join(iconsBase, 'favicon-16x16.png'),
         sizes: '16x16',
