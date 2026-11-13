@@ -14,6 +14,11 @@
   "prefer_related_applications": false,
   "icons": [
     {
+      "src": "icons/favicon.ico",
+      "sizes": "64x64",
+      "type": "image/x-icon"
+    },
+    {
       "src": "icons/favicon-16x16.png",
       "sizes": "16x16",
       "type": "image/png"
