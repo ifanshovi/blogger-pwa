@@ -1,3 +1,30 @@
+
+import * as path from 'node:path';
+import type { Manifest } from './types/manifest';
+
+export interface GetManifestOptions {
+  manifest?: Manifest;
+  base?: string;
+  iconsBase?: string;
+  screenshotsBase?: string;
+}
+
+export function getManifest(
+  {
+    manifest: { screenshots, shortcuts, ...manifest } = {},
+    base,
+    iconsBase = '.',
+    screenshotsBase = '.',
+  }: GetManifestOptions = { manifest: {} },
+): Manifest {
+  return {
+    ...manifest,
+    ...(base
+      ? {
+          start_url: manifest.start_url ? new URL(manifest.start_url, base).toString() : base,
+          scope: manifest.scope ? new URL(manifest.scope, base).toString() : base,
+        }
+      : undefined),
     icons: [
       {
         src: path.posix.join(iconsBase, 'favicon.ico'),
@@ -61,3 +88,33 @@
         type: 'image/png',
       },
     ],
+    ...(screenshots && screenshots.length !== 0
+      ? {
+          screenshots: screenshots.map(({ src, form_factor = 'narrow', type = 'image/png' }) => ({
+            src: path.posix.join(screenshotsBase, src),
+            type,
+            sizes: form_factor === 'narrow' ? '540x720' : '720x540',
+            form_factor,
+          })),
+        }
+      : undefined),
+    ...(shortcuts && shortcuts.length !== 0
+      ? {
+          shortcuts: shortcuts.map((shortcut) => ({
+            icons: [
+              {
+                src: path.posix.join(iconsBase, 'android-chrome-96x96.png'),
+                sizes: '96x96',
+              },
+            ],
+            ...shortcut,
+            ...(base && shortcut.url
+              ? {
+                  url: new URL(shortcut.url, base).toString(),
+                }
+              : undefined),
+          })),
+        }
+      : undefined),
+  };
+}
