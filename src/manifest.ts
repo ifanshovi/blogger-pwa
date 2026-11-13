@@ -21,6 +21,11 @@ export function getManifest(
       : undefined),
     icons: [
       {
+       src: path.posix.join(iconsBase, 'favicon.ico'),
+       sizes: '64x64',
+       type: 'image/x-icon',
+      },
+      {
         src: path.posix.join(iconsBase, 'favicon-16x16.png'),
         sizes: '16x16',
         type: 'image/png',
