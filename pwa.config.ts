@@ -1,4 +1,3 @@
-
 import { defineConfig } from '@/types/config';
 
 export default defineConfig({
