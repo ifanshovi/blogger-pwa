@@ -67,6 +67,7 @@
     {
       "src": "icons/android-chrome-512x512.png",
       "sizes": "512x512",
+      "purpose": "any"
       "type": "image/png"
     }
   ],
